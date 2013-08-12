@@ -1,0 +1,118 @@
+<!--
+ Demoiselle Framework
+ Copyright (C) 2010 SERPRO
+ ============================================================================
+ This file is part of Demoiselle Framework.
+ 
+ Demoiselle Framework is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public License version 3
+ as published by the Free Software Foundation.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU Lesser General Public License version 3
+ along with this program; if not,  see <http://www.gnu.org/licenses />
+ or write to the Free Software Foundation, Inc., 51 Franklin Street,
+ Fifth Floor, Boston, MA  02110-1301, USA.
+ ============================================================================
+ Este arquivo é parte do Framework Demoiselle.
+ 
+ O Framework Demoiselle é um software livre; você pode redistribuí-lo e/ou
+ modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ do Software Livre (FSF).
+ 
+ Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ para maiores detalhes.
+ 
+ Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses />
+ ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.gov.frameworkdemoiselle.documentation</groupId>
+	<artifactId>demoiselle-docbook-build</artifactId>
+	<version>2.0.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Demoiselle Build Docbook Tools</name>
+
+	<modules>
+		<module>xslt</module>
+		<module>style</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven.deploy.plugin.version}</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven.resources.plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Built-By>serpro</Built-By>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${maven.release.plugin.version}</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<preparationGoals>clean install</preparationGoals>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<scm>
+		<connection>scm:git:git@github.com:demoiselle/docbook.git</connection>
+		<developerConnection>scm:git:git@github.com:demoiselle/docbook.git</developerConnection>
+		<url>http://github.com/demoiselle/docbook</url>
+	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>demoiselle.sourceforge.net</id>
+			<name>Demoiselle Sourceforge Snapshots</name>
+			<url>sftp://web.sourceforge.net/home/groups/d/de/demoiselle/htdocs/repository/snapshot</url>
+		</snapshotRepository>
+		<repository>
+			<id>demoiselle.sourceforge.net</id>
+			<name>Demoiselle Sourceforge Repository</name>
+			<url>sftp://web.sourceforge.net/home/groups/d/de/demoiselle/htdocs/repository/release</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<maven.deploy.plugin.version>2.5</maven.deploy.plugin.version>
+		<maven.resources.plugin.version>2.5</maven.resources.plugin.version>
+		<maven.release.plugin.version>2.3.2</maven.release.plugin.version>
+	</properties>
+
+</project>
